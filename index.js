@@ -68,8 +68,11 @@ Object.keys(config.profiles).forEach(function ( profileName ) {
     profile.variables.author      = profile.variables.author      || pkgInfo.author;
     profile.variables.license     = profile.variables.license     || pkgInfo.license;
 
-    // files to delete in clear task
-    outFiles.push(path.join(process.env.PATH_APP, profile.outPath || '', profile.outFile || ''));
+    // protect from upper content deletion
+    if ( profile.outFile ) {
+        // files to delete in clear task
+        outFiles.push(path.join(process.env.PATH_APP, profile.outPath || '', profile.outFile));
+    }
 
     // profile build task
     gulp.task(taskName, function ( done ) {
