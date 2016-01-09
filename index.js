@@ -7,17 +7,17 @@
 
 'use strict';
 
-var fs           = require('fs'),
-    path         = require('path'),
-    util         = require('util'),
-    gulp         = require('gulp'),
-    jade         = require('jade'),
-    del          = require('del'),
-    tools        = require('spa-gulp/tools'),
-    config       = tools.load(path.join(process.env.PATH_ROOT, process.env.PATH_CFG, 'jade'), path.join(__dirname, 'config')),
-    pkgInfo      = require(process.env.PACKAGE),
-    outFiles     = [],
-    profileTasks = [];
+var fs       = require('fs'),
+    path     = require('path'),
+    util     = require('util'),
+    gulp     = require('gulp'),
+    jade     = require('jade'),
+    del      = require('del'),
+    tools    = require('spa-gulp/tools'),
+    config   = tools.load(path.join(process.env.PATH_ROOT, process.env.PATH_CFG, 'jade'), path.join(__dirname, 'config')),
+    pkgInfo  = require(process.env.PACKAGE),
+    outFiles = [],
+    taskList = [];
 
 
 function compile ( config, done ) {
@@ -91,7 +91,7 @@ Object.keys(config.profiles).forEach(function ( profileName ) {
     }
 
     // fill group task list
-    profileTasks.push(taskName);
+    taskList.push(taskName);
 });
 
 
@@ -108,7 +108,7 @@ gulp.task('jade:clean', function () {
 
 
 // run all profiles tasks
-gulp.task('jade', profileTasks);
+gulp.task('jade', taskList);
 
 
 // public
