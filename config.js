@@ -40,7 +40,11 @@ module.exports = {
             // built-in vars: name, version, description, author, license
             variables: {
                 develop: true
-            }
+            },
+
+            // create task jade:develop:watch
+            // to automatically rebuild on source files change
+            watch: true
         },
 
         // config for jade:release task
