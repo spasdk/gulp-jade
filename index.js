@@ -7,23 +7,16 @@
 
 'use strict';
 
-var fs      = require('fs'),
-    path    = require('path'),
-    util    = require('util'),
-    gulp    = require('gulp'),
-    //log     = require('gulp-util').log,
-    jade    = require('jade'),
-    //jade    = require('gulp-jade'),
-    //plumber = require('gulp-plumber'),
-    //rename  = require('gulp-rename'),
-    del     = require('del'),
-    //load    = require('require-nocache')(module),
-    tools   = require('spa-gulp/tools'),
-    config  = tools.load(path.join(process.env.PATH_ROOT, process.env.PATH_CFG, 'jade'), path.join(__dirname, 'config')),
-    pkgInfo = require(process.env.PACKAGE),
-    //entry   = path.join(process.env.PATH_SRC, 'jade', 'main.jade'),
-    //cfg     = path.join(process.env.PATH_ROOT, process.env.PATH_CFG, 'jade'),
-    outFiles = [],
+var fs           = require('fs'),
+    path         = require('path'),
+    util         = require('util'),
+    gulp         = require('gulp'),
+    jade         = require('jade'),
+    del          = require('del'),
+    tools        = require('spa-gulp/tools'),
+    config       = tools.load(path.join(process.env.PATH_ROOT, process.env.PATH_CFG, 'jade'), path.join(__dirname, 'config')),
+    pkgInfo      = require(process.env.PACKAGE),
+    outFiles     = [],
     profileTasks = [];
 
 

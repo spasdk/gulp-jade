@@ -12,6 +12,8 @@
         "jsdoc": "jsdoc --destination doc *.js readme.md"
     },
     "dependencies": {
+        "del": "2.*.*",
+        "jade": "1.*.*",
         "spa-gulp": "spasdk/gulp"
     },
     "keywords": [
