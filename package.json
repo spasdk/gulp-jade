@@ -1,0 +1,27 @@
+{
+    "name": "spa-gulp-jade",
+    "version": "1.3.0",
+    "description": "Compile HTML files from Jade sources.",
+    "author": {
+        "name": "Stanislav Kalashnik",
+        "email": "darkpark.main@gmail.com"
+    },
+    "repository": "spasdk/gulp-jade",
+    "scripts": {
+        "lint": "eslint *.js",
+        "jsdoc": "jsdoc --destination doc *.js readme.md"
+    },
+    "dependencies": {
+        "spa-gulp": "1.*.*"
+    },
+    "keywords": [
+        "spa",
+        "spasdk",
+        "framework",
+        "gulp",
+        "develop",
+        "task",
+        "jade"
+    ],
+    "license": "GPL-3.0"
+}
