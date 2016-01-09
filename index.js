@@ -11,29 +11,20 @@ var fs      = require('fs'),
     path    = require('path'),
     util    = require('util'),
     gulp    = require('gulp'),
-    log     = require('gulp-util').log,
+    //log     = require('gulp-util').log,
     jade    = require('jade'),
-//jade    = require('gulp-jade'),
-//plumber = require('gulp-plumber'),
-//rename  = require('gulp-rename'),
+    //jade    = require('gulp-jade'),
+    //plumber = require('gulp-plumber'),
+    //rename  = require('gulp-rename'),
     del     = require('del'),
-//load    = require('require-nocache')(module),
-    load    = require('spa-gulp/lib/load'),
-    config  = load('jade'),
+    //load    = require('require-nocache')(module),
+    tools   = require('spa-gulp/tools'),
+    config  = tools.load(path.join(process.env.PATH_ROOT, process.env.PATH_CFG, 'jade'), path.join(__dirname, 'config')),
     pkgInfo = require(process.env.PACKAGE),
-    entry   = path.join(process.env.PATH_SRC, 'jade', 'main.jade'),
-    cfg     = path.join(process.env.PATH_ROOT, process.env.PATH_CFG, 'jade'),
+    //entry   = path.join(process.env.PATH_SRC, 'jade', 'main.jade'),
+    //cfg     = path.join(process.env.PATH_ROOT, process.env.PATH_CFG, 'jade'),
     outFiles = [],
     profileTasks = [];
-
-
-//function prepare ( config ) {
-//    // rework fields
-//    return {
-//        filename: path.join(process.env.PATH_ROOT, process.env.PATH_APP, config.srcPath, config.srcFile),
-//        pretty: config.indentString
-//    };
-//}
 
 
 function compile ( config, done ) {
@@ -52,7 +43,7 @@ function compile ( config, done ) {
         fs.writeFileSync(outFile, render(config.variables));
     } catch ( error ) {
         // console log + notification popup
-        require('spa-gulp/lib/error')('jade', error.message);
+        tools.error('jade', error.message);
     }
 
     done();
@@ -74,6 +65,9 @@ Object.keys(config.profiles).forEach(function ( profileName ) {
     var profile  = config.profiles[profileName],
         taskName = 'jade:' + profileName;
 
+    // sanitize
+    profile.variables = profile.variables || {};
+
     // extend vars
     profile.variables.name        = profile.variables.name        || pkgInfo.name;
     profile.variables.version     = profile.variables.version     || pkgInfo.version;
@@ -82,7 +76,7 @@ Object.keys(config.profiles).forEach(function ( profileName ) {
     profile.variables.license     = profile.variables.license     || pkgInfo.license;
 
     // files to delete in clear task
-    outFiles.push(path.join(process.env.PATH_APP, profile.outPath, profile.outFile));
+    outFiles.push(path.join(process.env.PATH_APP, profile.outPath || '', profile.outFile || ''));
 
     gulp.task(taskName, function ( done ) {
         compile(profile, done);
@@ -95,7 +89,7 @@ Object.keys(config.profiles).forEach(function ( profileName ) {
 
 // output current config
 gulp.task('jade:config', function () {
-    console.log(util.inspect(config, {depth: 5, colors: true}));
+    tools.log('jade', util.inspect(config, {depth: 5, colors: true}));
 });
 
 
