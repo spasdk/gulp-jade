@@ -71,9 +71,21 @@ Object.keys(config.profiles).forEach(function ( profileName ) {
     // files to delete in clear task
     outFiles.push(path.join(process.env.PATH_APP, profile.outPath || '', profile.outFile || ''));
 
+    // profile build task
     gulp.task(taskName, function ( done ) {
         compile(profile, done);
     });
+
+    // profile watch task
+    if ( profile.watch ) {
+        // done callback should be present to show gulp that task is not over
+        gulp.task(taskName + ':watch', function ( done ) {
+            gulp.watch([
+                //process.env.PACKAGE,
+                path.join(process.env.PATH_SRC, profile.srcPath, '**', '*.jade')
+            ], [taskName]);
+        });
+    }
 
     // fill group task list
     profileTasks.push(taskName);
@@ -96,17 +108,7 @@ gulp.task('jade:clean', function () {
 gulp.task('jade', profileTasks);
 
 
-/*gulp.task('jade:watch', function ( done ) {
- // jade
- gulp.watch([
- 'package.json',
- path.join(process.env.PATH_SRC, 'jade', '**', '*.jade')
- ], ['jade:develop']);
- });*/
-
-
 // public
 module.exports = {
-    //prepare: prepare,
     compile: compile
 };
