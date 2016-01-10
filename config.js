@@ -17,20 +17,20 @@ module.exports = {
         default: {
             // directory to look for source files
             // default: <project root>/src/jade
-            srcPath: 'jade',
+            sourcePath: 'jade',
 
             // main source entry point
-            srcFile: 'main.jade',
+            sourceFile: 'main.jade',
 
             // directory to store output files
             // default: <project root>/app/
-            outPath: ''
+            targetPath: ''
         },
 
         // config for jade:develop task
         develop: {
             // intended output file name
-            outFile: 'develop.html',
+            targetFile: 'develop.html',
 
             // indentation to use in the output file
             // use some string or false to disable
@@ -50,7 +50,7 @@ module.exports = {
         // config for jade:release task
         release: {
             // intended output file name
-            outFile: 'index.html',
+            targetFile: 'index.html',
 
             // indentation to use in the output file
             // use some string or false to disable
