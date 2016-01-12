@@ -45,7 +45,7 @@ module.exports = {
                 develop: true
             },
 
-            // create task jade:develop:watch
+            // create task jade:watch:develop
             // to automatically rebuild on source files change
             watch: true
         },
