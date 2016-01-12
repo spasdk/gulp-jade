@@ -30,7 +30,7 @@ module.exports = {
             targetPath: ''
         },
 
-        // config for jade:develop task
+        // config for jade:build:develop task
         develop: {
             // intended output file name
             targetFile: 'develop.html',
@@ -50,7 +50,7 @@ module.exports = {
             watch: true
         },
 
-        // config for jade:release task
+        // config for jade:build:release task
         release: {
             // intended output file name
             targetFile: 'index.html',
