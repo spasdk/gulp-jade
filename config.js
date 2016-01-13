@@ -7,59 +7,56 @@
 
 'use strict';
 
-// public
+// set of named configs for corresponding gulp tasks
+// each profile inherits all options from the "default" profile
 module.exports = {
-    // set of named configs for corresponding gulp tasks
-    // each profile inherits all options from the "default" profile
-    profiles: {
-        // config to be extended by other profiles
-        default: {
-            // directory to look for source files
-            // default: <project root>/src/jade
-            sourcePath: 'jade',
+    // config to be extended by other profiles
+    default: {
+        // directory to look for source files
+        // default: <project root>/src/jade
+        sourcePath: 'jade',
 
-            // main source entry point
-            sourceFile: 'main.jade',
+        // main source entry point
+        sourceFile: 'main.jade',
 
-            // directory to store output files
-            // default: <project root>/app/
-            targetPath: ''
+        // directory to store output files
+        // default: <project root>/app/
+        targetPath: ''
+    },
+
+    // config for jade:build:develop task
+    develop: {
+        // intended output file name
+        targetFile: 'develop.html',
+
+        // indentation to use in the output file
+        // use some string or false to disable
+        indentString: '    ',
+
+        // local variables available in the jade source files
+        // built-in vars: name, version, description, author, license
+        variables: {
+            develop: true
         },
 
-        // config for jade:build:develop task
-        develop: {
-            // intended output file name
-            targetFile: 'develop.html',
+        // create task jade:watch:develop
+        // to automatically rebuild on source files change
+        watch: true
+    },
 
-            // indentation to use in the output file
-            // use some string or false to disable
-            indentString: '    ',
+    // config for jade:build:release task
+    release: {
+        // intended output file name
+        targetFile: 'index.html',
 
-            // local variables available in the jade source files
-            // built-in vars: name, version, description, author, license
-            variables: {
-                develop: true
-            },
+        // indentation to use in the output file
+        // use some string or false to disable
+        indentString: false,
 
-            // create task jade:watch:develop
-            // to automatically rebuild on source files change
-            watch: true
-        },
-
-        // config for jade:build:release task
-        release: {
-            // intended output file name
-            targetFile: 'index.html',
-
-            // indentation to use in the output file
-            // use some string or false to disable
-            indentString: false,
-
-            // local variables available in the jade source files
-            // built-in vars: name, version, description, author, license
-            variables: {
-                develop: false
-            }
+        // local variables available in the jade source files
+        // built-in vars: name, version, description, author, license
+        variables: {
+            develop: false
         }
     }
 };
