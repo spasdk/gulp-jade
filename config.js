@@ -33,11 +33,7 @@ module.exports = extend(true, {}, config, {
         // built-in vars: name, version, description, author, license
         variables: {
             develop: false
-        },
-
-        // create watch task
-        // to automatically rebuild on source files change
-        watch: false
+        }
     },
 
     develop: {
@@ -49,6 +45,8 @@ module.exports = extend(true, {}, config, {
             develop: true
         },
 
-        watch: true
+        watch: [
+
+        ]
     }
 });
