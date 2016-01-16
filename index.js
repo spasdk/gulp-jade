@@ -11,16 +11,20 @@ var fs       = require('fs'),
     gulp     = require('gulp'),
     jade     = require('jade'),
     del      = require('del'),
+    extend   = require('extend'),
     tools    = require('spa-gulp/tools'),
     gulpName = 'jade',
-    config   = tools.load(path.join(__dirname, 'config'), gulpName),
-    pkgInfo  = require(process.env.PACKAGE),
+    config   = tools.config(module, gulpName),
+    //pkgInfo  = require(process.env.PACKAGE),
+    //baseConfig = require('./config'),
+    //userConfig = require(path.join(process.cwd(), 'gulpfile.js'))[gulpName] || {},
     outFiles = [],
     buildTasks = [],
-    cleanTasks = [];
+    cleanTasks = [],
+    tasks = {};
 
 
-function compile ( profile, done ) {
+function build ( profile, done ) {
     var sourceFile = path.join(process.env.PATH_ROOT, process.env.PATH_SRC, profile.sourcePath, profile.sourceFile),
         targetFile = path.join(process.env.PATH_ROOT, process.env.PATH_APP, profile.targetPath, profile.targetFile),
         render  = null;
@@ -48,6 +52,47 @@ if ( !config ) {
     // do not create tasks
     return;
 }
+
+
+// main tasks
+tasks[gulpName] = [gulpName + ':build'];
+tasks[gulpName + ':build'] = [];
+tasks[gulpName + ':watch'] = [];
+tasks[gulpName + ':clean'] = [];
+
+
+// output current config
+tasks[gulpName + ':config'] = function () {
+    tools.log(gulpName, util.inspect(config, {depth: 5, colors: true}));
+};
+
+
+
+// public
+module.exports = tasks;
+
+return;
+
+
+// public
+var plugin = new Plugin({
+    name: 'jade',
+    entry: 'build',
+    context: module
+});
+
+plugin.profiles.forEach(function ( profile ) {
+    // jade:build
+    plugin.task('build', [
+        // jade:build:develop
+        profile.task('build', function () {
+            //
+        })
+    ]);
+});
+
+
+
 
 
 // build global task tree
@@ -91,7 +136,7 @@ Object.keys(config.profiles).forEach(function ( profileName ) {
 
     // profile build task
     gulp.task(buildName, function ( done ) {
-        compile(profile, done);
+        build(profile, done);
     });
 
     // remove all generated html files
@@ -163,5 +208,5 @@ gulp.task(gulpName + ':config', function () {
 
 // public
 module.exports = {
-    compile: compile
+    build: build
 };
