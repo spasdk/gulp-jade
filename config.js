@@ -7,20 +7,20 @@
 
 'use strict';
 
-var path = require('path');
+var path   = require('path'),
+    extend = require('extend'),
+    config = require('spa-gulp/config');
 
-// set of named configs for corresponding gulp tasks
+
+// base config
 // each profile inherits all options from the "default" profile
-module.exports = {
+module.exports = extend(true, {}, config, {
     default: {
         // directory to look for source files
-        sourcePath: path.join(process.env.PATH_SRC, 'jade'),
+        sourcePath: path.join(config.default.sourcePath, 'jade'),
 
         // main source entry point
         sourceFile: 'main.jade',
-
-        // directory to store output files
-        targetPath: process.env.PATH_APP,
 
         // intended output file name
         targetFile: 'index.html',
@@ -51,4 +51,4 @@ module.exports = {
 
         watch: true
     }
-};
+});
