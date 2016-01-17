@@ -46,7 +46,7 @@ module.exports = extend(true, {}, config, {
         },
 
         watch: [
-
+            path.join(config.default.sourcePath, 'jade', '**', '*.jade')
         ]
     }
 });
