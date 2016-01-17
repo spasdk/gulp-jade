@@ -9,7 +9,6 @@ var fs     = require('fs'),
     path   = require('path'),
     jade   = require('jade'),
     del    = require('del'),
-    tools  = require('spa-gulp/lib/tools'),
     Plugin = require('spa-gulp/lib/plugin'),
     plugin = new Plugin({name: 'jade', entry: 'build', context: module});
 
@@ -29,7 +28,7 @@ plugin.prepare = function ( name ) {
 
 
 // generate output file from profile
-plugin.build = function ( name, done ) {
+plugin.build = function ( name, callback ) {
     var data       = this.config[name],
         sourceFile = path.join(data.sourcePath, data.sourceFile),
         targetFile = path.join(data.targetPath, data.targetFile),
@@ -44,12 +43,11 @@ plugin.build = function ( name, done ) {
 
         // save generated result
         fs.writeFileSync(targetFile, render(data.variables));
-    } catch ( error ) {
-        // console log + notification popup
-        tools.error(this.name, error.message);
-    }
 
-    done();
+        callback(null, {targetFile: targetFile});
+    } catch ( error ) {
+        callback(error);
+    }
 };
 
 
@@ -60,12 +58,41 @@ plugin.profiles.forEach(function ( profile ) {
 
     // build + watch
     profile.watch(profile.task('build', function ( done ) {
-        plugin.build(profile.name, done);
+        plugin.build(profile.name, function ( error, result ) {
+            var message;
+
+            if ( error ) {
+                // prepare
+                message = error.message.split('\n');
+
+                profile.notify({
+                    type: 'fail',
+                    info: error.message,
+                    title: 'build',
+                    message: [message[0], '', message[message.length - 1]]
+                });
+            } else {
+                profile.notify({
+                    title: 'build',
+                    message: result.targetFile
+                });
+            }
+
+            done();
+        });
     }));
 
     // remove the generated file
     profile.task('clean', function () {
-        tools.log('clean', del.sync([path.join(profile.data.targetPath, profile.data.targetFile)]));
+        var files = del.sync([path.join(profile.data.targetPath, profile.data.targetFile)]);
+
+        if ( files ) {
+            profile.notify({
+                info: files,
+                title: 'clean',
+                message: files
+            });
+        }
     });
 });
 
