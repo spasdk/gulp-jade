@@ -53,32 +53,34 @@ plugin.profiles.forEach(function ( profile ) {
     // add vars
     plugin.prepare(profile.name);
 
-    // build + watch
-    profile.watch(profile.task(plugin.entry, function ( done ) {
-        plugin.build(profile.name, function ( error ) {
-            var message;
+    profile.watch(
+        // main entry task
+        profile.task(plugin.entry, function ( done ) {
+            plugin.build(profile.name, function ( error ) {
+                var message;
 
-            if ( error ) {
-                // prepare
-                message = error.message.split('\n');
+                if ( error ) {
+                    // prepare
+                    message = error.message.split('\n');
 
-                profile.notify({
-                    type: 'fail',
-                    info: error.message,
-                    title: plugin.entry,
-                    message: [message[0], '', message[message.length - 1]]
-                });
-            } else {
-                profile.notify({
-                    info: 'write '.green + profile.data.target,
-                    title: plugin.entry,
-                    message: profile.data.target
-                });
-            }
+                    profile.notify({
+                        type: 'fail',
+                        info: error.message,
+                        title: plugin.entry,
+                        message: [message[0], '', message[message.length - 1]]
+                    });
+                } else {
+                    profile.notify({
+                        info: 'write '.green + profile.data.target,
+                        title: plugin.entry,
+                        message: profile.data.target
+                    });
+                }
 
-            done();
-        });
-    }));
+                done();
+            });
+        })
+    );
 
     // remove the generated file
     profile.task('clean', function () {
