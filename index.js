@@ -29,22 +29,20 @@ plugin.prepare = function ( name ) {
 
 // generate output file from profile
 plugin.build = function ( name, callback ) {
-    var data       = this.config[name],
-        sourceFile = path.join(data.sourcePath, data.sourceFile),
-        targetFile = path.join(data.targetPath, data.targetFile),
-        render     = null;
+    var data = this.config[name],
+        render;
 
     try {
         // prepare function
-        render = jade.compileFile(sourceFile, {
-            filename: sourceFile,
+        render = jade.compileFile(data.source, {
+            filename: data.source,
             pretty: data.indentString
         });
 
         // save generated result
-        fs.writeFileSync(targetFile, render(data.variables));
+        fs.writeFileSync(data.target, render(data.variables));
 
-        callback(null, {targetFile: targetFile});
+        callback(null);
     } catch ( error ) {
         callback(error);
     }
@@ -58,7 +56,7 @@ plugin.profiles.forEach(function ( profile ) {
 
     // build + watch
     profile.watch(profile.task(plugin.entry, function ( done ) {
-        plugin.build(profile.name, function ( error, result ) {
+        plugin.build(profile.name, function ( error ) {
             var message;
 
             if ( error ) {
@@ -73,9 +71,9 @@ plugin.profiles.forEach(function ( profile ) {
                 });
             } else {
                 profile.notify({
-                    info: 'write '.green + result.targetFile,
+                    info: 'write '.green + profile.data.target,
                     title: plugin.entry,
-                    message: result.targetFile
+                    message: profile.data.target
                 });
             }
 
@@ -85,13 +83,12 @@ plugin.profiles.forEach(function ( profile ) {
 
     // remove the generated file
     profile.task('clean', function () {
-        var files = del.sync([path.join(profile.data.targetPath, profile.data.targetFile)]);
-
-        if ( files.length ) {
+        if ( del.sync([profile.data.target]).length ) {
+            // something was removed
             profile.notify({
-                info: 'delete '.green + files,
+                info: 'delete '.green + profile.data.target,
                 title: 'clean',
-                message: files
+                message: profile.data.target
             });
         }
     });

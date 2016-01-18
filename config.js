@@ -16,14 +16,11 @@ var path   = require('path'),
 // each profile inherits all options from the "default" profile
 module.exports = extend(true, {}, config, {
     default: {
-        // directory to look for source files
-        sourcePath: path.join(config.default.sourcePath, 'jade'),
+        // main entry point
+        source: path.join(config.default.source, 'jade', 'main.jade'),
 
-        // main source entry point
-        sourceFile: 'main.jade',
-
-        // intended output file name
-        targetFile: 'index.html',
+        // intended output file
+        target: path.join(config.default.target, 'index.html'),
 
         // indentation to use in the target file
         // use some string or false to disable
@@ -37,7 +34,7 @@ module.exports = extend(true, {}, config, {
     },
 
     develop: {
-        targetFile: 'develop.html',
+        target: path.join(config.default.target, 'develop.html'),
 
         indentString: '    ',
 
@@ -46,7 +43,7 @@ module.exports = extend(true, {}, config, {
         },
 
         watch: [
-            path.join(config.default.sourcePath, 'jade', '**', '*.jade')
+            path.join(config.default.source, 'jade', '**', '*.jade')
         ]
     }
 });
