@@ -73,6 +73,7 @@ plugin.profiles.forEach(function ( profile ) {
                 });
             } else {
                 profile.notify({
+                    info: 'write '.green + result.targetFile,
                     title: plugin.entry,
                     message: result.targetFile
                 });
@@ -86,9 +87,9 @@ plugin.profiles.forEach(function ( profile ) {
     profile.task('clean', function () {
         var files = del.sync([path.join(profile.data.targetPath, profile.data.targetFile)]);
 
-        if ( files ) {
+        if ( files.length ) {
             profile.notify({
-                info: files,
+                info: 'delete '.green + files,
                 title: 'clean',
                 message: files
             });
