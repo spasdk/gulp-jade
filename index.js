@@ -6,7 +6,6 @@
 'use strict';
 
 var fs     = require('fs'),
-    path   = require('path'),
     jade   = require('jade'),
     del    = require('del'),
     Plugin = require('spa-gulp/lib/plugin'),
