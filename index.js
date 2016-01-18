@@ -57,7 +57,7 @@ plugin.profiles.forEach(function ( profile ) {
     plugin.prepare(profile.name);
 
     // build + watch
-    profile.watch(profile.task('build', function ( done ) {
+    profile.watch(profile.task(plugin.entry, function ( done ) {
         plugin.build(profile.name, function ( error, result ) {
             var message;
 
@@ -68,12 +68,12 @@ plugin.profiles.forEach(function ( profile ) {
                 profile.notify({
                     type: 'fail',
                     info: error.message,
-                    title: 'build',
+                    title: plugin.entry,
                     message: [message[0], '', message[message.length - 1]]
                 });
             } else {
                 profile.notify({
-                    title: 'build',
+                    title: plugin.entry,
                     message: result.targetFile
                 });
             }
