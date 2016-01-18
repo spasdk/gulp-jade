@@ -14,8 +14,8 @@ var fs     = require('fs'),
 
 // rework profile
 plugin.prepare = function ( name ) {
-    var data = this.config[name],
-        vars = data.variables = data.variables || {};
+    var profile = this.config[name],
+        vars    = profile.variables = profile.variables || {};
 
     // extend vars
     vars.name        = vars.name        || this.package.name;
