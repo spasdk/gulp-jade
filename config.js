@@ -30,6 +30,21 @@ module.exports = extend(true, {}, config, {
         // built-in vars: name, version, description, author, license
         variables: {
             develop: false
+        },
+
+        // info channels
+        notifications: {
+            popup: {
+                info: {
+                    icon: path.join(__dirname, 'media', 'info.png')
+                },
+                warn: {
+                    icon: path.join(__dirname, 'media', 'warn.png')
+                },
+                fail: {
+                    icon: path.join(__dirname, 'media', 'fail.png')
+                }
+            }
         }
     },
 
