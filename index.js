@@ -67,7 +67,7 @@ plugin.profiles.forEach(function ( profile ) {
                         type: 'fail',
                         info: error.message,
                         title: plugin.entry,
-                        message: [message[0], '', message[message.length - 1]]
+                        message: [message[0], '\n', message[message.length - 1]]
                     });
                 } else {
                     profile.notify({
