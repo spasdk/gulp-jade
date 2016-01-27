@@ -13,17 +13,17 @@ var fs     = require('fs'),
 
 
 // rework profile
-plugin.prepare = function ( name ) {
-    var profile = this.config[name],
-        vars    = profile.variables = profile.variables || {};
-
-    // extend vars
-    vars.name        = vars.name        || this.package.name;
-    vars.version     = vars.version     || this.package.version;
-    vars.description = vars.description || this.package.description;
-    vars.author      = vars.author      || this.package.author;
-    vars.license     = vars.license     || this.package.license;
-};
+//plugin.prepare = function ( name ) {
+//    var profile = this.config[name],
+//        vars    = profile.variables = profile.variables || {};
+//
+//    // extend vars
+//    vars.name        = vars.name        || this.package.name;
+//    vars.version     = vars.version     || this.package.version;
+//    vars.description = vars.description || this.package.description;
+//    vars.author      = vars.author      || this.package.author;
+//    vars.license     = vars.license     || this.package.license;
+//};
 
 
 // generate output file from profile
@@ -51,7 +51,7 @@ plugin.build = function ( name, callback ) {
 // create tasks for profiles
 plugin.profiles.forEach(function ( profile ) {
     // add vars
-    plugin.prepare(profile.name);
+    //plugin.prepare(profile.name);
 
     profile.watch(
         // main entry task
