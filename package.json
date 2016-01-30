@@ -13,6 +13,7 @@
     },
     "dependencies": {
         "del": "2.*.*",
+        "extend": "3.*.*",
         "jade": "1.*.*",
         "spa-gulp": "spasdk/gulp"
     },
