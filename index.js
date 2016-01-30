@@ -8,8 +8,11 @@
 var fs     = require('fs'),
     jade   = require('jade'),
     del    = require('del'),
-    Plugin = require('spa-gulp/lib/plugin'),
-    plugin = new Plugin({name: 'jade', entry: 'build', context: module});
+    Plugin = require('spa-system/lib/plugin'),
+    plugin = new Plugin({
+        name: 'jade',
+        entry: 'build',
+        config: require('./config')});
 
 
 // rework profile
