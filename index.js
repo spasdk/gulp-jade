@@ -15,6 +15,16 @@ var fs     = require('fs'),
         config: require('./config')});
 
 
+// public
+module.exports = {
+    config: {},
+    commands: [],
+    services: []
+};
+
+return;
+
+
 // rework profile
 //plugin.prepare = function ( name ) {
 //    var profile = this.config[name],
