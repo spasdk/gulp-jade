@@ -1,12 +1,12 @@
 {
-    "name": "spa-system-jade",
+    "name": "spa-plugin-jade",
     "version": "1.3.0",
     "description": "Compile HTML files from Jade sources.",
     "author": {
         "name": "Stanislav Kalashnik",
         "email": "darkpark.main@gmail.com"
     },
-    "repository": "spasdk/system-jade",
+    "repository": "spasdk/plugin-jade",
     "scripts": {
         "lint": "eslint *.js",
         "jsdoc": "jsdoc --destination doc *.js readme.md"
