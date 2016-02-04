@@ -8,21 +8,11 @@
 var fs     = require('fs'),
     jade   = require('jade'),
     del    = require('del'),
-    Plugin = require('spa-system/lib/plugin'),
+    Plugin = require('spasdk/lib/plugin'),
     plugin = new Plugin({
         name: 'jade',
         entry: 'build',
         config: require('./config')});
-
-
-// public
-module.exports = {
-    config: {},
-    commands: [],
-    services: []
-};
-
-return;
 
 
 // rework profile

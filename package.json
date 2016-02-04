@@ -14,8 +14,7 @@
     "dependencies": {
         "del": "2.*.*",
         "extend": "3.*.*",
-        "jade": "1.*.*",
-        "spa-system": "spasdk/system"
+        "jade": "1.*.*"
     },
     "keywords": [
         "spa",

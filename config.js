@@ -9,7 +9,7 @@
 
 var path     = require('path'),
     extend   = require('extend'),
-    config   = require('spa-system/config'),
+    config   = require('spasdk/config'),
     pkgData  = require(path.join(process.cwd(), 'package.json')),
     profiles = {};
 
