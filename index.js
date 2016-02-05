@@ -7,13 +7,9 @@
 
 var fs       = require('fs'),
     jade     = require('jade'),
-    del      = require('del'),
     chokidar = require('chokidar'),
     Plugin   = require('spasdk/lib/plugin'),
-    plugin   = new Plugin({
-        name: 'jade',
-        entry: 'build',
-        config: require('./config')});
+    plugin   = new Plugin({name: 'jade', entry: 'build', config: require('./config')});
 
 
 // rework profile
@@ -87,18 +83,21 @@ plugin.profiles.forEach(function ( profile ) {
     );
 
     // remove the generated file
-    profile.task('clean', function () {
-        if ( del.sync([profile.data.target]).length ) {
-            // something was removed
+    profile.task('clean', function ( done ) {
+        fs.unlink(profile.data.target, function ( error ) {
             profile.notify({
-                info: 'delete '.green + profile.data.target.bold,
+                type: error ? 'warn' : 'info',
+                info: error ? error.toString().red : 'delete '.green + profile.data.target.bold,
                 title: 'clean',
-                message: profile.data.target
+                message: error ? error.toString() : profile.data.target
             });
-        }
+
+            done();
+        });
     });
 });
 
+//console.log(plugin);
 
 // public
 module.exports = plugin;
