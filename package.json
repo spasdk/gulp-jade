@@ -13,7 +13,6 @@
     },
     "dependencies": {
         "chokidar": "1.*.*",
-        "del": "2.*.*",
         "extend": "3.*.*",
         "jade": "1.*.*"
     },
