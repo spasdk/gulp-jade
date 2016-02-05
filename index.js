@@ -5,11 +5,12 @@
 
 'use strict';
 
-var fs     = require('fs'),
-    jade   = require('jade'),
-    del    = require('del'),
-    Plugin = require('spasdk/lib/plugin'),
-    plugin = new Plugin({
+var fs       = require('fs'),
+    jade     = require('jade'),
+    del      = require('del'),
+    chokidar = require('chokidar'),
+    Plugin   = require('spasdk/lib/plugin'),
+    plugin   = new Plugin({
         name: 'jade',
         entry: 'build',
         config: require('./config')});
