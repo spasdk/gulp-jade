@@ -5,12 +5,11 @@
 
 'use strict';
 
-var fs       = require('fs'),
-    jade     = require('jade'),
-    chokidar = require('chokidar'),
-    wamp     = require('spa-plugin-wamp'),
-    Plugin   = require('spasdk/lib/plugin'),
-    plugin   = new Plugin({name: 'jade', entry: 'build', config: require('./config')});
+var fs     = require('fs'),
+    jade   = require('jade'),
+    wamp   = require('spa-plugin-wamp'),
+    Plugin = require('spasdk/lib/plugin'),
+    plugin = new Plugin({name: 'jade', entry: 'build', config: require('./config')});
 
 
 // rework profile

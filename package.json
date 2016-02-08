@@ -12,7 +12,6 @@
         "jsdoc": "jsdoc --destination doc *.js readme.md"
     },
     "dependencies": {
-        "chokidar": "1.*.*",
         "extend": "3.*.*",
         "jade": "1.*.*"
     },
