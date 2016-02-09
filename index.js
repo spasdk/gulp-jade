@@ -7,7 +7,6 @@
 
 var fs     = require('fs'),
     jade   = require('jade'),
-    wamp   = require('spa-plugin-wamp'),
     Plugin = require('spasdk/lib/plugin'),
     plugin = new Plugin({name: 'jade', entry: 'build', config: require('./config')});
 
@@ -70,13 +69,9 @@ plugin.profiles.forEach(function ( profile ) {
                         message: [message[0].trim(), '', message[message.length - 1].trim()]
                     });
                 } else {
-                    wamp.message({
-                        data: profile.data.target,
-                        tags: ['jade', 'build', 'write']
-                    });
-
                     profile.notify({
-                        info: 'write '.green + profile.data.target.bold,
+                        info: 'write ' + profile.data.target,
+                        tags: [plugin.entry],
                         title: plugin.entry,
                         message: profile.data.target
                     });
