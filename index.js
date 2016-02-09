@@ -87,9 +87,8 @@ plugin.profiles.forEach(function ( profile ) {
         fs.unlink(profile.data.target, function ( error ) {
             profile.notify({
                 type: error ? 'warn' : 'info',
-                info: error ? error.toString().red : 'delete '.green + profile.data.target.bold,
                 title: 'clean',
-                message: error ? error.toString() : profile.data.target
+                message: error ? error : 'delete ' + profile.data.target
             });
 
             done();
