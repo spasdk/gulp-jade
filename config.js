@@ -26,6 +26,12 @@ profiles.default = extend(true, {}, config, {
         develop: false
     },
 
+    // false to prevent watch task creation
+    // otherwise array of globs to monitor
+    watch: [
+        path.join(config.source, 'jade', '**', '*.jade')
+    ],
+
     // info channels
     notifications: {
         popup: {
@@ -47,13 +53,7 @@ profiles.develop = extend(true, {}, profiles.default, {
     // local variables available in jade source files
     variables: {
         develop: true
-    },
-
-    // false to prevent watch task creation
-    // otherwise array of globs to monitor
-    watch: [
-        path.join(config.source, 'jade', '**', '*.jade')
-    ]
+    }
 });
 
 
