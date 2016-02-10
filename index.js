@@ -49,38 +49,35 @@ plugin.build = function ( name, callback ) {
 
 // create tasks for profiles
 plugin.profiles.forEach(function ( profile ) {
-    // add vars
-    //plugin.prepare(profile.name);
+    // main entry task
+    var task = profile.task(plugin.entry, function ( done ) {
+        plugin.build(profile.name, function ( error ) {
+            var message;
 
-    profile.watch(
-        // main entry task
-        profile.task(plugin.entry, function ( done ) {
-            plugin.build(profile.name, function ( error ) {
-                var message;
+            if ( error ) {
+                // prepare
+                message = error.message.split('\n');
 
-                if ( error ) {
-                    // prepare
-                    message = error.message.split('\n');
+                profile.notify({
+                    type: 'fail',
+                    info: error.message,
+                    title: plugin.entry,
+                    message: [message[0].trim(), '', message[message.length - 1].trim()]
+                });
+            } else {
+                profile.notify({
+                    info: 'write ' + profile.data.target,
+                    tags: [plugin.entry],
+                    title: plugin.entry,
+                    message: profile.data.target
+                });
+            }
 
-                    profile.notify({
-                        type: 'fail',
-                        info: error.message,
-                        title: plugin.entry,
-                        message: [message[0].trim(), '', message[message.length - 1].trim()]
-                    });
-                } else {
-                    profile.notify({
-                        info: 'write ' + profile.data.target,
-                        tags: [plugin.entry],
-                        title: plugin.entry,
-                        message: profile.data.target
-                    });
-                }
+            done();
+        });
+    });
 
-                done();
-            });
-        })
-    );
+    profile.watch(task);
 
     // remove the generated file
     profile.task('clean', function ( done ) {
