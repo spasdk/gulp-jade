@@ -68,8 +68,8 @@ plugin.profiles.forEach(function ( profile ) {
                 profile.notify({
                     info: 'write ' + profile.data.target,
                     tags: [plugin.entry],
-                    title: plugin.entry,
-                    message: profile.data.target
+                    title: plugin.entry
+                    //message: profile.data.target
                 });
             }
 
@@ -85,7 +85,8 @@ plugin.profiles.forEach(function ( profile ) {
             profile.notify({
                 type: error ? 'warn' : 'info',
                 title: 'clean',
-                message: error ? error : 'delete ' + profile.data.target
+                info: 'delete ' + profile.data.target,
+                message: error ? error.message : ''
             });
 
             done();
