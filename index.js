@@ -77,7 +77,7 @@ plugin.profiles.forEach(function ( profile ) {
         });
     });
 
-    profile.watch(task);
+    profile.watch('', profile.data.watch, task);
 
     // remove the generated file
     profile.task('clean', function ( done ) {
