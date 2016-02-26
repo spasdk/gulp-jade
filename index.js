@@ -7,7 +7,7 @@
 
 var fs     = require('fs'),
     jade   = require('jade'),
-    Plugin = require('spasdk/lib/plugin'),
+    Plugin = require('spa-plugin'),
     plugin = new Plugin({name: 'jade', entry: 'build', config: require('./config')});
 
 
