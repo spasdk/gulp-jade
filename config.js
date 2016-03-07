@@ -13,7 +13,7 @@ var path     = require('path'),
 
 
 // main
-profiles.default = extend(true, {}, config, {
+profiles.release = extend(true, {}, config, {
     // main entry point
     source: path.join(config.source, 'jade', 'main.jade'),
 
@@ -43,7 +43,7 @@ profiles.default = extend(true, {}, config, {
 });
 
 
-profiles.develop = extend(true, {}, profiles.default, {
+profiles.develop = extend(true, {}, profiles.release, {
     // intended output file
     target: path.join(config.target, 'develop.html'),
 
