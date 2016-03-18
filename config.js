@@ -18,7 +18,7 @@ profiles.release = extend(true, {}, config, {
     source: path.join(config.source, 'jade', 'main.jade'),
 
     // intended output file
-    target: path.join(config.target, 'index.html'),
+    target: path.join(config.target, 'release.html'),
 
     // local variables available in jade source files
     variables: {
