@@ -1,6 +1,7 @@
 Compile HTML files from Jade sources
 ====================================
 
+[![Build Status](https://img.shields.io/travis/spasdk/plugin-jade.svg?style=flat-square)](https://travis-ci.org/spasdk/plugin-jade)
 [![NPM version](https://img.shields.io/npm/v/spa-plugin-jade.svg?style=flat-square)](https://www.npmjs.com/package/spa-plugin-jade)
 [![Dependencies Status](https://img.shields.io/david/spasdk/plugin-jade.svg?style=flat-square)](https://david-dm.org/spasdk/plugin-jade)
 [![Gitter](https://img.shields.io/badge/gitter-join%20chat-blue.svg?style=flat-square)](https://gitter.im/DarkPark/spasdk)
