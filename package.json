@@ -1,6 +1,6 @@
 {
     "name": "spa-plugin-jade",
-    "version": "1.3.0",
+    "version": "1.0.0",
     "description": "Compile HTML files from Jade sources.",
     "author": {
         "name": "Stanislav Kalashnik",
