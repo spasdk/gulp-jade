@@ -28,9 +28,7 @@ profiles.release = extend(true, {}, config, {
 
     // false to prevent watch task creation
     // otherwise array of globs to monitor
-    watch: [
-        path.join(config.source, 'jade', '**', '*.jade')
-    ],
+    watch: [path.join(config.source, 'jade', '**', '*.jade')],
 
     // info channels
     notifications: {
